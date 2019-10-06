@@ -3,12 +3,12 @@ import {Text, View, StyleSheet} from 'react-native';
 
 class Todo extends Component {
     render() {
-        const activity = ['WORKING','SWIMING','STUDYING','SLEEPING','RUNNING']
+        const activitys = ['WORKING','SWIMING','STUDYING','SLEEPING','RUNNING']
         return (           
             <View>
-                {activity.map((activity, index) => {
+                {activitys.map((activitys, index) => {
                     return (
-                        <Text key={index} style={style.activity}> {activity}</Text>
+                        <Text key={index} style={style.activitys}> {activitys}</Text>
                     )
                 }
                     )}
@@ -20,7 +20,7 @@ class Todo extends Component {
 export default Todo;
 
 const style = StyleSheet.create ({
-    activity: {
+    activitys: {
         fontSize: 20,
         borderWidth: 3,
         borderRadius: 10,
