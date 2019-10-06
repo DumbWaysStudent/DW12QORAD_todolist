@@ -8,4 +8,4 @@ import Todo from './src/Todo';
 import Addtodo from './src/Addtodo';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => Todo);
+AppRegistry.registerComponent(appName, () => Addtodo);

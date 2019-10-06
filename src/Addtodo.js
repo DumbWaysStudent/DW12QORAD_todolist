@@ -1,49 +1,103 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TextInput, Button} from 'react-native';
+import {Text, View, StyleSheet, TextInput, TouchableHighlight, FlatList} from 'react-native';
 
-class Addtodo extends Component {
-    render() {
-        const activity = ['WORKING','SWIMING','STUDYING','SLEEPING','RUNNING']
-        return ( 
-         <View style={style.container}>  
-            <View>
-                <TextInput style={style.textinput}></TextInput>
-                <Button title="ADD" color='red' onPress={() => Alert}></Button>
-            </View>          
-            <View>
-                {activity.map((activity, index) => {
-                    return (
-                        <Text key={index} style={style.activity}> {activity}</Text>
-                    )
-                }
-                    )}
-            </View>
-        </View> 
-        );
+
+export default class Addtodo extends Component {
+
+    constructor() {
+    super();
+    
+    this.state = {
+        add:'Add',
+        text:'  ENTER YOUR ACTIVITY HERE ...',
+        arrayHolder:[],
+        inputHolder:null
     }
-}
+    
+    this.todo = [
+        {id:1, items:'WORKING'},
+        {id:2, items:'SWIMING'},
+        {id:3, items:'STUDYING'},
+        {id:4, items:'SLEEPING'},
+        {id:5, items:'RUNING'}
+    ]
+    }
 
-export default Addtodo;
+    handleInput = () => {
+        this.todo.push({items: this.state.inputHolder})
+        this.setState({ arrayHolder: [...this.todo] })
+        this.textInputRef.clear();
+    }
 
-const style = StyleSheet.create ({
+    render() {
+      return (
+        <View style={style.container}>
+            <View style={style.todoInput}>
+                <TextInput 
+                autoCorrect={false} 
+                ref={ref => this.textInputRef = ref}
+                placeholder={this.state.text} 
+                style={style.inputStyle} onChangeText={data => this.setState({inputHolder: data})} />
+                <TouchableHighlight title={this.state.add}  onPress={this.handleInput}>
+                    <Text style={style.title}>ADD</Text>
+                </TouchableHighlight>
+            </View>
+            <View>
+            <FlatList
+                data={this.todo}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => 
+                <View   style={style.list}>
+                <Text style={style.textList}> {item.items} </Text>         
+                </View>
+            }
+            />
+            </View>
+        </View>
+      );
+    }
+  }
+  
+const style = StyleSheet.create({
     container: {
-        flex: 1,
-    },   
-    activity: {
+        flex:1,
+        backgroundColor:'#fafafa',
+        margin: 5
+    },
+
+    todoInput: {
+        flexDirection: 'row',
+    },
+
+    inputStyle: {
+        marginHorizontal:4,
+        backgroundColor:'white',
+        borderRadius:8,
+        borderWidth: 1, 
+        flex: 8   
+    },
+
+    title: {
+        padding: 12,
         fontSize: 20,
-        borderWidth: 3,
-        borderRadius: 10,
-        margin: 5,
-        padding: 5
-    },
-    textinput: {
-        height: 50,
-        borderWidth: 2,
+        color: '#fff',
+        borderWidth: 1,
+        backgroundColor: 'red',
+        borderRadius: 8,
         marginHorizontal: 5,
-        marginVertical: 10       
+        textAlign: 'center'
     },
-    button: {
-        height: 50,
-        color: 'red'
+
+    list: {
+        height: 46,
+        backgroundColor:'white',
+        borderRadius:8,
+        borderWidth: 1,
+        margin:6,
+        padding:8
+    },
+
+    textList: {
+        fontSize: 20
     }
 })
