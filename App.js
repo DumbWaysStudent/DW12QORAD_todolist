@@ -7,15 +7,11 @@
  */
 
 import React from 'react';
-import Todo from './src/Todo';
 import Addtodo from './src/Addtodo';
 
 const App: () => React$Node = () => {
   return (
-	<View>
-		<Todo/>
-		<Addtodo/>
-	</View>
+	<Addtodo/>
   );
 };
 
