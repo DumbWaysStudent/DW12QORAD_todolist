@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
-class Todo extends Component {
+class TodoList extends Component {
     render() {
         const activities = ['WORKING','SWIMING','STUDYING','SLEEPING','RUNNING']
         return (           
@@ -17,7 +17,7 @@ class Todo extends Component {
     }
 }
 
-export default Todo;
+export default TodoList;
 
 const style = StyleSheet.create ({
     activities: {
