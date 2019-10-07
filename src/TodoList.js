@@ -4,7 +4,7 @@ import {CheckBox} from 'native-base';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default class updateTodo extends Component {
+export default class TodoList extends Component {
 
     constructor() {
     super();
@@ -12,7 +12,6 @@ export default class updateTodo extends Component {
     this.state = {
         isEdit: false,
         updateId: 0,
-        text:'  ENTER YOUR ACTIVITY HERE ...',
         arrayHolder:[],
         inputHolder:'',
         todo: [
@@ -24,13 +23,6 @@ export default class updateTodo extends Component {
         ]
     }
     
-    // this.todo = [
-    //     {id:1, items:'WORKING'},
-    //     {id:2, items:'SWIMING'},
-    //     {id:3, items:'STUDYING'},
-    //     {id:4, items:'SLEEPING'},
-    //     {id:5, items:'RUNING'}
-    // ]
     }
 
     handleInput = () => {
@@ -51,9 +43,6 @@ export default class updateTodo extends Component {
             todos.push(todoItem)
             this.setState({todo:todos, inputHolder:''})
         }
-        // this.todo.push({items: this.state.inputHolder})
-        // this.setState({ arrayHolder: [...this.todo] })
-        // this.textInputRef.clear();
     }
 
     handleDelete = (id) => {
@@ -96,7 +85,6 @@ export default class updateTodo extends Component {
                 <TextInput
                     autoCorrect={false}
                     value={this.state.inputHolder} 
-                    // ref={ref => this.textInputRef = ref}
                     placeholder='New Todo'
                     style={style.inputStyle}
                     onChangeText={text => this.setState({inputHolder: text})}
