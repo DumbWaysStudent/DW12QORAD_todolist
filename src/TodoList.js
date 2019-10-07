@@ -4,14 +4,13 @@ import {CheckBox} from 'native-base';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default class TodoIsDone extends Component {
+export default class TodoList extends Component {
 
     constructor() {
     super();
     
     this.state = {
         add:'Add',
-        text:'  ENTER YOUR ACTIVITY HERE ...',
         arrayHolder:[],
         inputHolder:'',
         todo: [
@@ -22,20 +21,10 @@ export default class TodoIsDone extends Component {
             {id:5, items:'RUNING', isCompleted: true}
         ]
     }
-    
-    // this.todo = [
-    //     {id:1, items:'WORKING'},
-    //     {id:2, items:'SWIMING'},
-    //     {id:3, items:'STUDYING'},
-    //     {id:4, items:'SLEEPING'},
-    //     {id:5, items:'RUNING'}
-    // ]
+
     }
 
     handleInput = () => {
-        // this.todo.push({items: this.state.inputHolder})
-        // this.setState({ arrayHolder: [...this.todo] })
-        // this.textInputRef.clear();
         const todos=this.state.todo
         const todoItem={
             id: todos.length + 1,
@@ -69,8 +58,6 @@ export default class TodoIsDone extends Component {
             <View style={style.todoInput}>
                 <TextInput autoCorrect={false}
                 value={this.state.inputHolder} 
-                // ref={ref => this.textInputRef = ref}
-                // placeholder={this.state.text} 
                 style={style.inputStyle} onChangeText={text => this.setState({inputHolder: text})} />
                 <TouchableHighlight title={this.state.add}  onPress={this.handleInput}>
                     <Text style={style.title}>ADD</Text>
