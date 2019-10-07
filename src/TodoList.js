@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableHighlight, FlatList} from 'react-native';
 
-export default class Addtodo extends Component {
+import Icon from 'react-native-vector-icons/FontAwesome'
+
+export default class TodoList extends Component {
 
     constructor() {
     super();
@@ -9,46 +11,54 @@ export default class Addtodo extends Component {
     this.state = {
         add:'Add',
         text:'  ENTER YOUR ACTIVITY HERE ...',
-        // arrayHolder:[],
-        inputHolder: ''
+        arrayHolder:[],
+        inputHolder:'',
+        todo: [
+            {id:1, items:'WORKING'},
+            {id:2, items:'SWIMING'},
+            {id:3, items:'STUDYING'},
+            {id:4, items:'SLEEPING'},
+            {id:5, items:'RUNING'}
+        ]
+
     }
-    
-    this.todo = [
-        {id:1, items:'WORKING'},
-        {id:2, items:'SWIMING'},
-        {id:3, items:'STUDYING'},
-        {id:4, items:'SLEEPING'},
-        {id:5, items:'RUNING'}
-    ]
+
     }
-    
+
     handleInput = () => {
-        this.todo.push({todo: this.state.inputHolder})
-        this.setState({ arrayHolder: [this.todo], inputHolder: '' })
-        // this.textInputRef.clear();
-        console.log (this.state.todo)
+        const todos=this.state.todo
+        const todoItem={
+            id: todos.length + 1,
+            items: this.state.inputHolder
+        }
+        todos.push(todoItem)
+        this.setState({todo:todos,inputHolder:''})
+    }
+
+    handleDelete = (id) => {
+        console.log (id)
+        this.setState ({todo: [...this.state.todo.filter(todo => todo.id !== id)]})
     }
 
     render() {
       return (
         <View style={style.container}>
             <View style={style.todoInput}>
-                <TextInput autoCorrect={false} 
-                // ref={ref => this.textInputRef = ref}
-                value={inputHolder}
-                placeholder={this.state.text} 
-                style={style.inputStyle} onChangeText={data => this.setState({inputHolder: data})} />
+                <TextInput autoCorrect={false}
+                value={this.state.inputHolder} 
+                style={style.inputStyle} onChangeText={text => this.setState({inputHolder: text})} />
                 <TouchableHighlight title={this.state.add}  onPress={this.handleInput}>
                     <Text style={style.title}>ADD</Text>
                 </TouchableHighlight>
             </View>
             <View>
-            <FlatList
-                data={this.todo}
+            <FlatList 
+                data={this.state.todo}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => 
-                <View   style={style.list}>
-                <Text style={style.textList}> {item.items} </Text>         
+                <View key={item.id} style={style.list}>
+                    <Text style={style.textList}> {item.items} </Text>  
+                    <Icon name='trash' style={style.icon} onPress={() => this.handleDelete(item.id)}  />
                 </View>
             }
             />
@@ -82,13 +92,14 @@ const style = StyleSheet.create({
         fontSize: 20,
         color: '#fff',
         borderWidth: 1,
-        backgroundColor: 'red',
+        backgroundColor: 'blue',
         borderRadius: 8,
         marginHorizontal: 5,
         textAlign: 'center'
     },
 
     list: {
+        flexDirection: 'row',
         height: 46,
         backgroundColor:'white',
         borderRadius:8,
@@ -98,6 +109,11 @@ const style = StyleSheet.create({
     },
 
     textList: {
-        fontSize: 20
+        fontSize: 20,
+        flex: 8
+    },
+    icon: {
+        fontSize: 30,
+        color: 'red'
     }
 })
