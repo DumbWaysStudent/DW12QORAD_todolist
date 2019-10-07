@@ -13,11 +13,7 @@ import DeleteTodo from './src/DeleteTodo';
 
 const App: () => React$Node = () => {
   return (
-	<View>
-		<Todo/>
-		<Addtodo/>
-		<DeleteTodo/>
-	</View>
+	<DeleteTodo/>
   );
 };
 
