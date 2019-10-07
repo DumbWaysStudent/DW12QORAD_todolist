@@ -7,19 +7,11 @@
  */
 
 import React from 'react';
-import Todo from './src/Todo';
-import Addtodo from './src/Addtodo';
-import DeleteTodo from './src/DeleteTodo';
-import TodoIsDone from './src/TodoIsDone';
+import UpdateTodo from './src/UpdateTodo';
 
 const App: () => React$Node = () => {
   return (
-    <View>
-		<Todo/>
-		<Addtodo/>
-		<DeleteTodo/>
-		<TodoIsDone/>
-	</View>
+    <UpdateTodo/>
   );
 };
 
