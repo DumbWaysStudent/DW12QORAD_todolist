@@ -7,11 +7,11 @@
  */
 
 import React from 'react';
-import Addtodo from './src/Addtodo';
+import TodoList from './src/TodoList';
 
 const App: () => React$Node = () => {
   return (
-	<Addtodo/>
+	<TodoList/>
   );
 };
 

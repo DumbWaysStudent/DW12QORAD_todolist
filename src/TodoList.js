@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableHighlight, FlatList} from 'react-native';
 
-export default class Addtodo extends Component {
+export default class TodoList extends Component {
 
     constructor() {
     super();
@@ -9,32 +9,34 @@ export default class Addtodo extends Component {
     this.state = {
         add:'Add',
         text:'  ENTER YOUR ACTIVITY HERE ...',
-        arrayHolder:[],
-        inputHolder:null
+        todo : [
+            {id:1, items:'WORKING'},
+            {id:2, items:'SWIMING'},
+            {id:3, items:'STUDYING'},
+            {id:4, items:'SLEEPING'},
+            {id:5, items:'RUNING'}
+        ],
+        inputHolder: ''
     }
     
-    this.todo = [
-        {id:1, items:'WORKING'},
-        {id:2, items:'SWIMING'},
-        {id:3, items:'STUDYING'},
-        {id:4, items:'SLEEPING'},
-        {id:5, items:'RUNING'}
-    ]
     }
-
+    
     handleInput = () => {
-        this.todo.push({items: this.state.inputHolder})
-        this.setState({ arrayHolder: [...this.todo] })
-        this.textInputRef.clear();
+        const todos=this.state.todo
+        const todoItem={
+            id: todos.length + 1,
+            items: this.state.inputHolder
+        }
+        todos.push(todoItem)
+        this.setState({todo:todos,inputHolder:''})
     }
 
     render() {
       return (
         <View style={style.container}>
             <View style={style.todoInput}>
-                <TextInput 
-                autoCorrect={false} 
-                ref={ref => this.textInputRef = ref}
+                <TextInput autoCorrect={false} 
+                value={this.state.inputHolder}
                 placeholder={this.state.text} 
                 style={style.inputStyle} onChangeText={data => this.setState({inputHolder: data})} />
                 <TouchableHighlight title={this.state.add}  onPress={this.handleInput}>
@@ -43,10 +45,10 @@ export default class Addtodo extends Component {
             </View>
             <View>
             <FlatList
-                data={this.todo}
+                data={this.state.todo}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => 
-                <View   style={style.list}>
+                <View  key={item.id} style={style.list}>
                 <Text style={style.textList}> {item.items} </Text>         
                 </View>
             }
